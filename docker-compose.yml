@@ -1,0 +1,24 @@
+version: "3"
+volumes:
+  db:
+services:
+  app:
+    build: .
+    ports:
+    - "8080:8080"
+    environment:
+      DATABASE_CONNECTION_STRING: "host=db user=apiuser password=example dbname=blog port=5432 sslmode=disable"
+      API_SECRET: "secret"
+      TOKEN_HOUR_LIFESPAN: 1
+      API_PORT: 8080
+    depends_on:
+      - db
+    restart: always
+  db:
+    image: postgres:13.10
+    volumes:
+    - ./initdb:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_PASSWORD: example
+    ports:
+    - "5432:5432"
