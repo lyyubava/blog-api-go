@@ -11,4 +11,5 @@ type Post struct {
 	UserID    uint       `json:"userId"`
 	CreatedBy string     `json:"createdBy"`
 	CreatedAt *time.Time `json:"created_at"`
+	Comments  []Comment  `gorm:"PostID:CreatedBy"`
 }

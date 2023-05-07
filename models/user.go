@@ -26,12 +26,13 @@ func (u *User) PrepareGive() {
 }
 
 type User struct {
-	ID       uint   `json:"id" gorm:"primary_key"`
-	FullName string `json:"fullName"`
-	Email    string `json:"email"`
-	Username string `json:"username" gorm:"not null; unique"`
-	Password string `json:"password" gorm:"not null; unique"`
-	Posts    []Post `gorm:"foreignKey:UserID"`
+	ID       uint      `json:"id" gorm:"primary_key"`
+	FullName string    `json:"fullName"`
+	Email    string    `json:"email"`
+	Username string    `json:"username" gorm:"not null; unique"`
+	Password string    `json:"password" gorm:"not null; unique"`
+	Posts    []Post    `gorm:"foreignKey:UserID"`
+	Comments []Comment `gorm:"foreignKey:CreatedBy"`
 }
 
 func (u *User) SaveUser() (*User, error) {
