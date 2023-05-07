@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"mini-blog-go/controllers"
 	"mini-blog-go/controllers/auth"
+	"mini-blog-go/controllers/users_interactions"
 	"mini-blog-go/models"
 	"os"
 
@@ -27,8 +28,13 @@ func bootstrap() {
 	router_auth.POST("/register", auth.Register)
 	router_auth.POST("/login", auth.Login)
 
+	r.GET("/health", controllers.Health)
+
+	r.POST("/comment", users_interactions.Comment)
+
 	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	r.Run(fmt.Sprintf("0.0.0.0:%s", os.Getenv("API_PORT")))
+
 }
 
 func main() {
