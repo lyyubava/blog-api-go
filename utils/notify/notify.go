@@ -10,8 +10,10 @@ import (
 )
 
 type EventInfo struct {
-	EventName string
-	EventTime time.Time
+	EventName      string
+	EventTime      time.Time
+	EventUser      string
+	EventUserEmail string
 }
 type Event struct {
 	EventDetails string

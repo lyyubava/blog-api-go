@@ -9,8 +9,6 @@ import (
 	"os"
 
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
 func bootstrap() {
@@ -31,8 +29,9 @@ func bootstrap() {
 	r.GET("/health", controllers.Health)
 
 	r.POST("/comment", users_interactions.Comment)
+	r.POST("/like", users_interactions.Like)
 
-	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+	r.GET("/analytics", controllers.GetLikesAnalytics)
 	r.Run(fmt.Sprintf("0.0.0.0:%s", os.Getenv("API_PORT")))
 
 }

@@ -12,4 +12,5 @@ type Post struct {
 	CreatedBy string     `json:"createdBy"`
 	CreatedAt *time.Time `json:"created_at"`
 	Comments  []Comment  `gorm:"PostID:CreatedBy"`
+	Likes     []Like     `gorm:"PostID:CreatedBy"`
 }

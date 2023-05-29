@@ -1,12 +1,11 @@
 package users_interactions
 
 import (
-	"encoding/json"
+	"fmt"
 	"mini-blog-go/models"
 	"mini-blog-go/utils/notify"
 	"mini-blog-go/utils/token"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,14 +15,9 @@ type CommentInput struct {
 	PostID  uint   `json:"postId" binding:"required"`
 }
 
-type CommentEventDetails struct {
-	CommentId string
-}
-
 func Comment(c *gin.Context) {
 	var input CommentInput
 	user_id, err := token.ExtractTokenId(c)
-
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -45,14 +39,22 @@ func Comment(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{"data": "comment was successfully added"})
 
-	commentEventDetails := CommentEventDetails{CommentId: strconv.FormatUint(uint64(comment.ID), 10)}
-	commentEventDetailsStr, _ := json.Marshal(&commentEventDetails)
+	post := models.Post{}
+	_ = models.DB.First(&post, input.PostID)
+	user := models.User{Username: post.CreatedBy}
+	models.DB.First(&user)
+
+	username := user.Username
+	email := user.Email
 	commentEvent := notify.Event{}
 	commentEvent.EventInfo.EventName = "Comment"
 	commentEvent.EventInfo.EventTime = comment.CreatedAt
-	commentEvent.EventDetails = string(commentEventDetailsStr)
+	commentEvent.EventInfo.EventUser = username
+	commentEvent.EventInfo.EventUserEmail = email
+
+	commentFormatted := fmt.Sprintf("%s commented on your post - '%s'", username, comment.Comment)
+	commentEvent.EventDetails = commentFormatted
 
 	notify.Publish(commentEvent)
-	return
 
 }
