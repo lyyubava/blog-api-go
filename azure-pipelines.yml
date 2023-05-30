@@ -47,6 +47,6 @@ steps:
   inputs:
     command: buildAndPush
     repository: $(IMAGE_REPOSITORY)
-    dockerfile: ${{ dockerfilePath }}
+    dockerfile: $(dockerfilePath)
     containerRegistry: $(ARTIFACT_REGISTRY_SERVICE_CONNECTION)
     tags: $(tag.tag)
