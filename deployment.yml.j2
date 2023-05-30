@@ -16,13 +16,27 @@ spec:
     spec:
       containers:
       - name: blog-api
-        image: {{ IMAGE }}
+        image: IMAGE_NAME
         ports:
-        - containerPort: 8080
+        - containerPort: {{ api_port }}
+      env:
+        - name: API_SECRET
+          value: "{{ api_secret }}"
+        - name: TOKEN_HOUR_LIFESPAN
+          value: "{{ token_hour_lifespan }}"
+        - name: DATABASE_CONNECTION_STRING
+          value: "{{ database_connection_string }}"
+        - name: API_PORT
+          value: "{{ api_port }}"
+        - name: PROJECT_ID
+          value: "{{ project_id }}"        
+        - name: PUBSUB_TOPIC
+          value: "{{ pubsub_topic }}"
+        - name: SERVICE_ACCOUNT_KEY
+          value: "{{ service_account_key }}" 
       restartPolicy: Always
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
