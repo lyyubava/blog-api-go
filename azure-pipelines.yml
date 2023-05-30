@@ -1,6 +1,7 @@
 variables:
 - name: dockerfilePath
   value: Dockerfile
+- group: social-network-var-group
 
 steps:
 
