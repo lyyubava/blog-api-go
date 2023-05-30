@@ -15,7 +15,7 @@ steps:
    script: |
      ./ci/common
    failOnStderr: true
-   workingDirectory: "$(System.DefaultWorkingDirectory)/blog-api-go/"
+   workingDirectory: "$(System.DefaultWorkingDirectory)/"
 
 - bash: |
     short_hash=$(git rev-parse --short=7 HEAD)
