@@ -9,7 +9,7 @@ steps:
   displayName: 'Install dependencies'
   inputs:
     command: 'custom'
-    customCommand: 'mod download'
+    customCommand: mod download
 
 - task: Go@0
   displayName: Run tests
