@@ -11,7 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func bootstrap() {
+func bootstrapRouter() *gin.Engine {
 	r := gin.Default()
 
 	models.ConnectDatabase()
@@ -30,12 +30,11 @@ func bootstrap() {
 
 	r.POST("/comment", users_interactions.Comment)
 	r.POST("/like", users_interactions.Like)
-
-	//r.GET("/analytics", controllers.GetLikesAnalytics)
-	r.Run(fmt.Sprintf("0.0.0.0:%s", os.Getenv("API_PORT")))
+	return r
 
 }
 
 func main() {
-	bootstrap()
+	router := bootstrapRouter()
+	router.Run(fmt.Sprintf("0.0.0.0:%s", os.Getenv("API_PORT")))
 }
