@@ -13,8 +13,6 @@ import (
 
 func bootstrapRouter() *gin.Engine {
 	r := gin.Default()
-
-	models.ConnectDatabase()
 	router_posts := r.Group("/post")
 	router_posts.POST("/create", controllers.CreatePost)
 	router_posts.PUT("/edit", controllers.EditPost)
@@ -35,6 +33,7 @@ func bootstrapRouter() *gin.Engine {
 }
 
 func main() {
+	models.ConnectDatabase()
 	router := bootstrapRouter()
 	router.Run(fmt.Sprintf("0.0.0.0:%s", os.Getenv("API_PORT")))
 }
