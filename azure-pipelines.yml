@@ -22,6 +22,11 @@ steps:
     pip3 install jinja2
   displayName: 'Install Jinja2'
 
+- bash: |
+    version=$(git log -1 --date='short' --format='%h-%ad')
+    echo "##vso[task.setvariable variable=tag;isoutput=true]$version"
+  displayName: Set version to short hash
+
 - task: Bash@3
   displayName: 
   inputs:
@@ -31,10 +36,6 @@ steps:
    failOnStderr: true
    workingDirectory: "$(System.DefaultWorkingDirectory)/"
 
-- bash: |
-    version=$(git log -1 --date='short' --format='%h-%ad')
-    echo "##vso[task.setvariable variable=tag;isoutput=true]$version"
-  displayName: Set version to short hash
 # 
 # - task: CmdLine@1
 #   displayName: 'Lock image version in deployment.yaml'
