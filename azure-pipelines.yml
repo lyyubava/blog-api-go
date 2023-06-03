@@ -27,13 +27,14 @@ steps:
     echo "##vso[task.setvariable variable=tag;isoutput=true]$version"
   displayName: Set version to short hash
 
+
 - task: Bash@3
   displayName: 
   inputs:
-   targetType: 'inline'
-   script: |
-     ./ci/common
+   targetType: 'filePath'
+   filePath: './ci/common'
    failOnStderr: true
+   arguments: "tag=$(tag)"
    workingDirectory: "$(System.DefaultWorkingDirectory)/"
 
 # 
