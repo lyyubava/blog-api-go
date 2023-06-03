@@ -31,12 +31,10 @@ steps:
    failOnStderr: true
    workingDirectory: "$(System.DefaultWorkingDirectory)/"
 
-# - bash: |
-#     short_hash=$(git rev-parse --short=7 HEAD)
-#     tag="${short_hash}"
-#     echo "##vso[task.setvariable variable=tag;isoutput=true]$tag"
-#   name: tag
-#   displayName: Set version to short hash
+- bash: |
+    version=$(git log -1 --date='short' --format='%h-%ad')
+    echo "##vso[task.setvariable variable=tag;isoutput=true]$version"
+  displayName: Set version to short hash
 # 
 # - task: CmdLine@1
 #   displayName: 'Lock image version in deployment.yaml'
@@ -60,4 +58,4 @@ steps:
     repository: $(IMAGE_REPOSITORY)
     dockerfile: $(dockerfilePath)
     containerRegistry: $(ARTIFACT_REGISTRY_SERVICE_CONNECTION)
-    tags: $(tag.tag)
+    tags: $(tag)

@@ -19,5 +19,5 @@ python3 ci/scripts/render_templates.py deployment.yml.j2 \
                                 --project_id="$PROJECT_ID" \
                                 --api_secret="$API_SECRET" \
                                 --pubsub_topic="$PUBSUB_TOPIC" \
-                                --image="europe-central2-docker.pkg.dev/$IMAGE_REPOSITORY:$version"
+                                --image="europe-central2-docker.pkg.dev/$IMAGE_REPOSITORY:$tag"
                                                                
