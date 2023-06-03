@@ -31,10 +31,10 @@ steps:
 - task: Bash@3
   displayName: 
   inputs:
-   targetType: 'filePath'
-   filePath: './ci/common'
+   targetType: 'inline'
+   script: |
+     tag=$(tag) ./ci/common
    failOnStderr: true
-   arguments: "tag=$(tag)"
    workingDirectory: "$(System.DefaultWorkingDirectory)/"
 
 # 
