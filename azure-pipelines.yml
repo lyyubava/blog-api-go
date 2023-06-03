@@ -31,18 +31,18 @@ steps:
    failOnStderr: true
    workingDirectory: "$(System.DefaultWorkingDirectory)/"
 
-- bash: |
-    short_hash=$(git rev-parse --short=7 HEAD)
-    tag="${short_hash}"
-    echo "##vso[task.setvariable variable=tag;isoutput=true]$tag"
-  name: tag
-  displayName: Set version to short hash
-
-- task: CmdLine@1
-  displayName: 'Lock image version in deployment.yaml'
-  inputs:
-    filename: /bin/bash
-    arguments: '-c "awk ''{gsub(\"IMAGE_NAME\", \"europe-central2-docker.pkg.dev/$(IMAGE_REPOSITORY):$(tag.tag)\", $0); print}'' deployment.yml > $(build.artifactstagingdirectory)/deployment.yml"'
+# - bash: |
+#     short_hash=$(git rev-parse --short=7 HEAD)
+#     tag="${short_hash}"
+#     echo "##vso[task.setvariable variable=tag;isoutput=true]$tag"
+#   name: tag
+#   displayName: Set version to short hash
+# 
+# - task: CmdLine@1
+#   displayName: 'Lock image version in deployment.yaml'
+#   inputs:
+#     filename: /bin/bash
+#     arguments: '-c "awk ''{gsub(\"IMAGE_NAME\", \"europe-central2-docker.pkg.dev/$(IMAGE_REPOSITORY):$(tag.tag)\", $0); print}'' deployment.yml > $(build.artifactstagingdirectory)/deployment.yml"'
 
 - script:
     cat $(build.artifactstagingdirectory)/deployment.yml

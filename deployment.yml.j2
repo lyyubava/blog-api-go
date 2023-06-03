@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: blog-api
-        image: IMAGE_NAME
+        image: {{ image }}
         ports:
         - containerPort: {{ api_port }}
         env:

@@ -4,8 +4,11 @@ scriptpath="$(readlink -f "$0")"
 workdir="${scriptpath%/*}"
 cd "${workdir}/.."
 
-echo "Render deployment template with variables"
 
+version=$(git log -1 --date='short' --format='%h-%ad')
+
+
+echo "Render deployment template with variables":
 
 
 python3 ci/scripts/render_templates.py deployment.yml.j2 \
@@ -15,5 +18,6 @@ python3 ci/scripts/render_templates.py deployment.yml.j2 \
                                 --service_account_key="$SERVICE_ACCOUNT_KEY" \
                                 --project_id="$PROJECT_ID" \
                                 --api_secret="$API_SECRET" \
-                                --pubsub_topic="$PUBSUB_TOPIC"
+                                --pubsub_topic="$PUBSUB_TOPIC" \
+                                --image="europe-central2-docker.pkg.dev/$IMAGE_REPOSITORY:$version"
                                                                
