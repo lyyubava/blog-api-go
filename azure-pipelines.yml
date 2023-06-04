@@ -26,8 +26,9 @@ steps:
     version=$(git log -1 --date='short' --format='%h-%ad')
     echo "##vso[task.setvariable variable=tag;isoutput=true]$version"
   displayName: Set version to short hash
+  name: tag
 
-- script: echo $(tag)
+- script: echo $(tag.tag)
 # - task: Bash@3
 #   displayName: 
 #   inputs:
