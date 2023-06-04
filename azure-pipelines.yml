@@ -37,7 +37,7 @@ steps:
     script: |
       tag=$(tag.tag) ./ci/common
     failOnStderr: true
-    workingDirectory: "$(System.DefaultWorkingDirectory)/"
+  #  workingDirectory: "$(System.DefaultWorkingDirectory)/"
     
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
