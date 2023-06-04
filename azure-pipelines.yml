@@ -55,4 +55,4 @@ steps:
     repository: $(IMAGE_REPOSITORY)
     dockerfile: $(dockerfilePath)
     containerRegistry: $(ARTIFACT_REGISTRY_SERVICE_CONNECTION)
-    tags: $(tag)
+    tags: $(tag.tag)
