@@ -35,10 +35,10 @@ steps:
   inputs:
     targetType: 'inline'
    # tag=$(tag.tag)
-  script: |
-    ./ci/common
-  failOnStderr: true
-  workingDirectory: "$(System.DefaultWorkingDirectory)/
+    script: |
+      ./ci/common
+    failOnStderr: true
+    workingDirectory: "$(System.DefaultWorkingDirectory)/
 # 
 # - task: CmdLine@1
 #   displayName: 'Lock image version in deployment.yaml'
