@@ -34,8 +34,9 @@ steps:
   displayName: 
   inputs:
    targetType: 'inline'
+   # tag=$(tag.tag)
    script: |
-     tag=$(tag) ./ci/common
+    ./ci/common
    failOnStderr: true
    workingDirectory: "$(System.DefaultWorkingDirectory)/
 # 
