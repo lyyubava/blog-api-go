@@ -31,14 +31,14 @@ steps:
 - script: echo $(tag.tag)
 
 - task: Bash@3
-  displayName: 
+  displayName: Render deployment
   inputs:
     targetType: 'inline'
    # tag=$(tag.tag)
     script: |
       ./ci/common
     failOnStderr: true
-    workingDirectory: "$(System.DefaultWorkingDirectory)/
+    workingDirectory: "$(System.DefaultWorkingDirectory)/"
 # 
 # - task: CmdLine@1
 #   displayName: 'Lock image version in deployment.yaml'
