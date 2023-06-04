@@ -34,26 +34,19 @@ steps:
   displayName: Render deployment
   inputs:
     targetType: 'inline'
-   # tag=$(tag.tag)
     script: |
       tag=$(tag.tag) ./ci/common
     failOnStderr: true
     workingDirectory: "$(System.DefaultWorkingDirectory)/"
-# 
-# - task: CmdLine@1
-#   displayName: 'Lock image version in deployment.yaml'
-#   inputs:
-#     filename: /bin/bash
-#     arguments: '-c "awk ''{gsub(\"IMAGE_NAME\", \"europe-central2-docker.pkg.dev/$(IMAGE_REPOSITORY):$(tag.tag)\", $0); print}'' deployment.yml > $(build.artifactstagingdirectory)/deployment.yml"'
-
-- script:
-    cat $(build.artifactstagingdirectory)/deployment.yml
     
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
     ArtifactName: deployment
-    PathtoPublish: '$(build.artifactstagingdirectory)'        
+    PathtoPublish: '$(build.artifactstagingdirectory)' 
+
+- script:
+    cat $(build.artifactstagingdirectory)/deployment.yml       
 
 - task: Docker@2
   displayName: Build and push an image to Artifact Registry
