@@ -35,7 +35,7 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      tag=$(tag.tag) ./ci/common
+      tag=$(tag.tag) ./ci/common > $(build.artifactstagingdirectory)/deployment.yml
     failOnStderr: true
   #  workingDirectory: "$(System.DefaultWorkingDirectory)/"
     
