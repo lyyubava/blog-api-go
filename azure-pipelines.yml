@@ -36,7 +36,7 @@ steps:
     targetType: 'inline'
    # tag=$(tag.tag)
     script: |
-      ./ci/common
+      tag=$(tag.tag) ./ci/common
     failOnStderr: true
     workingDirectory: "$(System.DefaultWorkingDirectory)/"
 # 
