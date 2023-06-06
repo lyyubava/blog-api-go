@@ -16,5 +16,5 @@ func TestPingRoute(t *testing.T) {
 	router.ServeHTTP(w, req)
 
 	assert.Equal(t, 200, w.Code)
-	assert.Equal(t, "{\"data\":\"Health ok\"}", w.Body.String())
+	assert.Equal(t, "{\"data\":\"social network service is up and running!\"}", w.Body.String())
 }
