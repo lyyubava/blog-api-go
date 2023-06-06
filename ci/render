@@ -4,7 +4,6 @@ scriptpath="$(readlink -f "$0")"
 workdir="${scriptpath%/*}"
 cd "${workdir}/.."
 
-echo "Render deployment template with variables":
 python3 ci/scripts/render_templates.py deployment.yml.j2 \
                                 --api_port="$API_PORT" \
                                 --token_hour_lifespan="$TOKEN_HOUR_LIFESPAN" \
