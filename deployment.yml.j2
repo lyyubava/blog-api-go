@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend-deployment
+  name: social-network-deployment
   labels:
-    app: backend
+    app: social-network
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: blog-api
+      app: social-network
   template:
     metadata:
       labels:
-        app: blog-api
+        app: social-network
     spec:
       containers:
-      - name: blog-api
+      - name: social-network
         image: {{ image }}
         ports:
         - containerPort: {{ api_port }}
@@ -41,13 +41,13 @@ apiVersion: v1
 kind: Service
 metadata:
     labels:
-        app: blog-api
-    name: blog-api-service
+        app: social-network
+    name: social-network-service
 spec:
     ports:
     - port: 80
       protocol: TCP
-      targetPort: 8080
+      targetPort: {{ api_port }}
     selector:
-        app: blog-api
+        app: social-network
     type: ClusterIP

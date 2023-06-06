@@ -1,10 +1,9 @@
 variables:
+- group: social-network-var-group
 - name: dockerfilePath
   value: Dockerfile
-- group: social-network-var-group
 
 steps:
-
 - task: Go@0
   displayName: 'Install dependencies'
   inputs:
@@ -28,25 +27,19 @@ steps:
   displayName: Set version to short hash
   name: tag
 
-- script: echo $(tag.tag)
-
 - task: Bash@3
   displayName: Render deployment
   inputs:
     targetType: 'inline'
     script: |
-      tag=$(tag.tag) ./ci/common > $(build.artifactstagingdirectory)/deployment.yml
+      tag=$(tag.tag) ./ci/render > $(build.artifactstagingdirectory)/deployment.yml
     failOnStderr: true
-  #  workingDirectory: "$(System.DefaultWorkingDirectory)/"
     
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact'
   inputs:
     ArtifactName: deployment
-    PathtoPublish: '$(build.artifactstagingdirectory)' 
-
-- script:
-    cat $(build.artifactstagingdirectory)/deployment.yml       
+    PathtoPublish: '$(build.artifactstagingdirectory)'      
 
 - task: Docker@2
   displayName: Build and push an image to Artifact Registry
