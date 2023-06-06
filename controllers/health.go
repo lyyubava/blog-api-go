@@ -7,6 +7,6 @@ import (
 )
 
 func Health(c *gin.Context) {
-	status := "Health ok"
+	status := "social network service is up and running!"
 	c.JSON(http.StatusOK, gin.H{"data": status})
 }
